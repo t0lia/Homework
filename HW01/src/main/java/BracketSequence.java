@@ -56,21 +56,28 @@ public class BracketSequence {
     }
 
     /***
+     * Recursive method. Puts valid brackets sequences in StdOut.
      * @param br:    count of brackets
-     *               br[0] - output (
-     *               br[1] - output )
-     *               br[2] - input (
-     *               br[3] - input )
+     *               br[0] >= 0 - output (
+     *               br[1] >= 0 - output )
+     *               br[2] >= 0 - input (
+     *               br[3] >= 0 - input )
      * @param stack: character from output string
      */
     public static void m(int[] br, Deque<Character> stack) {
+        // if we have no input brackets -> print data from stack
         if (br[2] == 0 && br[3] == 0) {
             System.out.println(stackToString(stack));
         } else if (br[2] == 0) {
+            // if we have only closed brackets -> put its onto the stack
             cBracket(br, stack);
         } else if (br[0] == br[1]) {
+            // if counts of open and closed brackets are the same
+            // put open bracket onto the stack
             oBracket(br, stack);
         } else if (br[0] > br[1]) {
+            // if count of open brackets more than counts of closed brackets
+            // try two cases.
             cBracket(br, stack);
             oBracket(br, stack);
         }
